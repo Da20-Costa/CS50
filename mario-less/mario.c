@@ -17,7 +17,6 @@ int main (void)
     {
         printf("#");
     }
-}
-    //New row
     printf("\n");
+}
 }
