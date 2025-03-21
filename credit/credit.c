@@ -4,12 +4,14 @@
 
 int every_other_digit(long credit_card);
 int multiplyAndSum(int last_digit);
+int number_digits(long credit_card);
 
 int main (void)
 {
     long credit_card = get_long("Credit Card: ");
     int sum_every_other_digit = every_other_digit(credit_card);
-    printf("%i", sum_every_other_digit);
+    int numDigits = number_digits(credit_card);
+    printf("%i", numDigits);
     if (sum_every_other_digit % 10 != 0){
         printf("INVALID\n");
         return 1;
@@ -45,4 +47,13 @@ int multiplyAndSum(int last_digit){
         multiply = multiply / 10;
     }
     return sum;
+}
+
+int number_digits(long credit_card){
+    int count = 0;
+    while(credit_card > 0){
+        count++;
+        credit_card = credit_card / 10;
+    }
+    return count;
 }
