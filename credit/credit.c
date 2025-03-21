@@ -9,6 +9,7 @@ int main (void)
 {
     long credit_card = get_long("Credit Card: ");
     int sum_every_other_digit = every_other_digit(credit_card);
+    printf("%i", sum_every_other_digit);
 
 }
 
