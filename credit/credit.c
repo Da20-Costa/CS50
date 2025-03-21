@@ -21,7 +21,7 @@ int every_other_digit(long credit_card){
             int product = multiplyAndSum(last_digit);
             sum = sum + last_digit;
         }
-        isAlternateDigit = !isAlternateDigit
+        isAlternateDigit = !isAlternateDigit;
         credit_card = credit_card / 10;
     }
     return sum;
