@@ -10,6 +10,10 @@ int main (void)
     long credit_card = get_long("Credit Card: ");
     int sum_every_other_digit = every_other_digit(credit_card);
     printf("%i", sum_every_other_digit);
+    if (sum_every_other_digit % 10 != 0){
+        printf("INVALID\n");
+        return 1;
+    }
 
 }
 
