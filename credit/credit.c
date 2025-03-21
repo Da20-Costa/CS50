@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <math.h>
 
+int every_other_digit(long credit_card);
+
 int main (void)
 {
     long credit_card = get_long("Credit Card: ");
