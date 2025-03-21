@@ -59,5 +59,8 @@ int number_digits(long credit_card){
 }
 
 bool isValidAmex(long credit_card, int numDigit){
-    int first_two_digits = 
+    if(numDigit == 15){
+        int i = numDigit - 2;
+        int first_two_digits = numDigit / pow (10,i);
+    }
 }
