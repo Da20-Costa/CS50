@@ -22,3 +22,5 @@ int every_other_digit(long credit_card){
     }
     return sum;
 }
+
+int multiplyAndSum(int last_digit)
