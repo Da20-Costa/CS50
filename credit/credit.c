@@ -19,7 +19,7 @@ int every_other_digit(long credit_card){
         if(isAlternateDigit == true){
             int last_digit = credit_card % 10;
             int product = multiplyAndSum(last_digit);
-            sum = sum + last_digit;
+            sum = sum + product;
         }
         isAlternateDigit = !isAlternateDigit;
         credit_card = credit_card / 10;
