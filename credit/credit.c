@@ -30,6 +30,9 @@ int main (void)
     else if(visa == true){
         printf("VISA\n");
     }
+    else{
+        printf("INVALID\n");
+    }
 }
 
 int every_other_digit(long credit_card){
