@@ -70,7 +70,7 @@ int number_digits(long credit_card){
 bool isValidAmex(long credit_card, int numDigits){
         int i = numDigits - 2;
         int first_two_digits = credit_card / pow (10,i);
-        if((numDigit == 15) && (first_two_digits == 34 || first_two_digits == 37)){
+        if((numDigits == 15) && (first_two_digits == 34 || first_two_digits == 37)){
             return true;
         }
         else{
@@ -78,10 +78,10 @@ bool isValidAmex(long credit_card, int numDigits){
         }
 }
 
-bool isValidMasterCard(long credit_card, int numDigit){
-    int i = numDigit - 2;
+bool isValidMasterCard(long credit_card, int numDigits){
+    int i = numDigits - 2;
     int first_two_digits = credit_card / pow (10,i);
-    if((numDigit == 16) && (first_two_digits > 50 && first_two_digits < 56)){
+    if((numDigits == 16) && (first_two_digits > 50 && first_two_digits < 56)){
         return true;
     }
     else{
