@@ -7,6 +7,7 @@ int multiplyAndSum(int last_digit);
 int number_digits(long credit_card);
 bool isValidAmex(long credit_card, int numDigit);
 bool isValidMasterCard(long credit_card, int numDigit);
+bool isValidVisa(long credit_card, int numDigits);
 
 int main (void)
 {
@@ -15,6 +16,7 @@ int main (void)
     int numDigits = number_digits(credit_card);
     bool amex = isValidAmex(credit_card, numDigits);
     bool master = isValidMasterCard(credit_card, numDigits);
+    bool visa = isValidVisa(credit_card, numDigits);
     if (sum_every_other_digit % 10 != 0){
         printf("INVALID\n");
         return 1;
@@ -25,7 +27,9 @@ int main (void)
     else if(master == true){
         printf("MASTERCARD\n");
     }
-
+    else if(visa == true){
+        printf("VISA\n");
+    }
 }
 
 int every_other_digit(long credit_card){
