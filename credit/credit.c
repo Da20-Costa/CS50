@@ -88,3 +88,7 @@ bool isValidMasterCard(long credit_card, int numDigits){
         return false;
     }
 }
+
+bool isValidVisa(long credit_card, int numDigits){
+    int i = 
+}
