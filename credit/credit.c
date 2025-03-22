@@ -90,5 +90,15 @@ bool isValidMasterCard(long credit_card, int numDigits){
 }
 
 bool isValidVisa(long credit_card, int numDigits){
-    int i = 
+    if(numDigits == 13 || numDigits == 16){
+        int i = numDigits - 1;
+        int first_digit = credit_card / pow (10, i);
+        if(first_digit == 4){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    return false;
 }
