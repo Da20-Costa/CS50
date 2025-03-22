@@ -19,7 +19,7 @@ int main (void)
     bool visa = isValidVisa(credit_card, numDigits);
     if (sum_every_other_digit % 10 != 0){
         printf("INVALID\n");
-        return 1;
+        return 0;
     }
     else if(amex == true){
         printf("AMEX\n");
@@ -32,6 +32,7 @@ int main (void)
     }
     else{
         printf("INVALID\n");
+        return 0;
     }
 }
 
