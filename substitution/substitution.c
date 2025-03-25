@@ -20,6 +20,7 @@ int main(int argc, string argv[])
         return 1;
     }
  }
+
     int key = atoi(argv[1]);
 
     string plaintext = get_string("Plaintext: ");
@@ -42,3 +43,5 @@ int main(int argc, string argv[])
     }
     printf("\n");
 }
+
+bool n_letters_key ()
