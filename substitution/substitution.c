@@ -4,6 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 
+string key = argv[1];
+
 int main(int argc, string argv[])
 {
     if(argc != 2)
@@ -12,16 +14,14 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    for(int i = 0; i < strlen(argv[1]); i++)
+    for(int i = 0; i < strlen(key); i++)
  {
-    if(!isalpha(argv[1][i]))
+    if(!isalpha(key[i]))
     {
         printf("Usage: ./caesar key\n");
         return 1;
     }
  }
-
-    int key = atoi(argv[1]);
 
     string plaintext = get_string("Plaintext: ");
     printf("Ciphertext: ");
@@ -44,4 +44,3 @@ int main(int argc, string argv[])
     printf("\n");
 }
 
-bool n_letters_key ()
