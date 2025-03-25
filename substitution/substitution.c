@@ -4,7 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 
-string key = argv[1];
+string key;
 
 int main(int argc, string argv[])
 {
@@ -13,6 +13,8 @@ int main(int argc, string argv[])
         printf("Usage: ./caesar key\n");
         return 1;
     }
+
+    string key = argv[1];
 
     for(int i = 0; i < strlen(key); i++)
  {
