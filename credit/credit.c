@@ -5,8 +5,8 @@
 int every_other_digit(long credit_card);
 int multiplyAndSum(int last_digit);
 int number_digits(long credit_card);
-bool isValidAmex(long credit_card, int numDigit);
-bool isValidMasterCard(long credit_card, int numDigit);
+bool isValidAmex(long credit_card, int numDigits);
+bool isValidMasterCard(long credit_card, int numDigits);
 bool isValidVisa(long credit_card, int numDigits);
 
 int main (void)
