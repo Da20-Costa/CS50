@@ -8,4 +8,4 @@ How do you know?: Using the same method as before, when we compare the two runni
 
 sort3 uses: Selection sort best 2.933 worst 3.175
 
-How do you know?: Again, comparing the two scenarios, we get the upper bound being 3.175s and the lower bound being 2.933s. Examining the two running times, we observe that they are pretty close and are relatively fast, but not as fast as the algorithm of sort2. Therefore, it corresponds to the 
+How do you know?: Again, comparing the two scenarios, we get the upper bound being 3.175s and the lower bound being 2.933s. Examining the two running times, we observe that they are pretty close and are relatively fast, but not as fast as the algorithm of sort2. Therefore, it corresponds to the attributes of Selection sort, which is θ(n²).
