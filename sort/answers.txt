@@ -1,10 +1,10 @@
 sort1 uses: Bubble sort
 
-How do you know?: Using the best scenario (the list already sorted), it took 1.181s to sort it, which is pretty fast. However, in the worst scenario,it took 5.718s to sort it. Comparing the two running times, they correspond to the bounds of the bubble sort, which are quite distants from each other: O(N²) and Ω(N).
+How do you know?: Using the best scenario (the list already sorted), it took 1.181s to sort it, which is pretty fast. However, in the worst scenario (the reversed list),it took 5.718s to sort it. Comparing the two running times, they correspond to the bounds of the bubble sort, which are quite distants from each other: O(N²) and Ω(N).
 
 sort2 uses: Merge sort best 1.583 worst 1.193
 
-How do you know?: Using the same method as before, when we compare the two running times, they are quite similar, besides being pretty fast. Analising the asymptotic notation of the available algorithms, it matches to the merge sort's one, that is, θ
+How do you know?: Using the same method as before, when we compare the two running times, they are quite similar, besides being pretty fast. Analising the asymptotic notation of the available algorithms, it matches to the merge sort's one, that is, θ(N log N).
 
 sort3 uses: Selection sort best 2.933 worst 3.175
 
