@@ -6,6 +6,6 @@ sort2 uses: Merge sort
 
 How do you know?: Using the same method as before, when we compare the two running times (best: 1.583s; worst: 1.193s), they are quite similar, besides being pretty fast. Analyzing the asymptotic notation of the available algorithms, it matches to the merge sort's one, that is, θ(n log n).
 
-sort3 uses: Selection sort best 2.933 worst 3.175
+sort3 uses: Selection sort
 
 How do you know?: Again, comparing the two scenarios, we get the upper bound being 3.175s and the lower bound being 2.933s. Examining the two running times, we observe that they are pretty close and are relatively fast, but not as fast as the algorithm of sort2. Therefore, it corresponds to the attributes of Selection sort, which is θ(n²).
