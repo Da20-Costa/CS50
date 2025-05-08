@@ -15,7 +15,7 @@ int main(int argc, string argv[])
         return 1;
     }
 
-    string key = argv[1];
+    string key = argv[1]; //Definying the key to the argument
     key = ToUpperString(key); //Putting all the letters of the key to uppercase
     bool isKeyValid = validate_key(key); //Checking if the key put by the user is correct
 
