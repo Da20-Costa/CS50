@@ -159,7 +159,7 @@ void tabulate(void)
 // Print the winner of the election, if there is one
 bool print_winner(void)
 {
-    // TODO
+    int majority = (voter_count / 2) + 1;
     return false;
 }
 
