@@ -127,7 +127,7 @@ int main(int argc, string argv[])
 // Record preference if vote is valid
 bool vote(int voter, int rank, string name)
 {
-    for (int i = 0; i < candite_count; i ++)
+    for (int i = 0; i < candidate_count; i ++)
     {
         if (strcmp(candidates[i].name, name) == 0)
         {
@@ -177,7 +177,7 @@ int find_min(void)
     int min_votes = MAX_VOTERS;
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidate[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
             if (candidates[i].votes < min_votes)
             {
@@ -193,7 +193,7 @@ bool is_tie(int min)
 {
     for (int i = 0; i < candidate_count; i++)
     {
-        if (candidate[i].eliminated == false)
+        if (candidates[i].eliminated == false)
         {
             if (candidates[i].votes != min)
             {
