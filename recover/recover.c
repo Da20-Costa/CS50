@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     FILE *img = NULL;
     int count = 0;
 
-    while(fread(buffer, sizeof(BYTE), sizeof(BLOCK), card) == BLOCK)
+    while(fread(buffer, sizeof(BYTE), BLOCK, card) == BLOCK)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
         }
         if (img != NULL)
         {
-            fwrite(buffer, sizeof(BYTE), sizeof(BLOCK), img);
+            fwrite(buffer, sizeof(BYTE), BLOCK, img);
         }
     }
 
