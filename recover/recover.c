@@ -25,14 +25,28 @@ int main(int argc, char *argv[])
     FILE *img = NULL;
     int count = 0;
 
+    if (buffer == NULL || jpeg == NULL)
+    {
+        printf("Memory allocation failed.\n");
+        fclose(card);
+        return 1;
+    }
+
     while(fread(buffer, sizeof(BYTE), BLOCK, card) == BLOCK)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
+
+            if (img != NULL)
+            {
+                fclose(img);
+            }
+
             sprintf(jpeg, "%03i.jpg", count);
             img = fopen(jpeg, "w");
             count++;
         }
+        
         if (img != NULL)
         {
             fwrite(buffer, sizeof(BYTE), BLOCK, img);
