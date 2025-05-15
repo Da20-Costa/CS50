@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 const int BLOCK = 512;
 typedef uint8_t BYTE;
 
 int main(int argc, char *argv[])
 {
-    if(arg != 2)
+    if(argc != 2)
     {
         printf("Usage: ./recover card.raw\n");
         return 1;
     }
 
     FILE *card = fopen(argv[1], "r");
-    if (input == NULL)
+    if (card == NULL)
     {
         printf("Could not open file.\n");
         return 1;
