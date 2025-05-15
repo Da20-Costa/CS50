@@ -22,4 +22,7 @@ int main(int argc, char *argv[])
     BYTE *buffer = malloc(BLOCK * sizeof(BYTE));
 
     while(fread(buffer, BYTE, BLOCK, card) == BLOCK)
+    {
+        if ()
+    }
 }
