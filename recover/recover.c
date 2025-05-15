@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
                 fclose(card);
                 return 1;
             }
-            
+
             count++;
         }
 
@@ -66,7 +66,10 @@ int main(int argc, char *argv[])
     free(buffer);
     free(jpeg);
     fclose(card);
-    fclose(img);
+    if (img != NULL)
+    {
+        fclose(img);
+    }
 
     return 0;
 }
