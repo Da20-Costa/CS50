@@ -44,9 +44,19 @@ int main(int argc, char *argv[])
 
             sprintf(jpeg, "%03i.jpg", count);
             img = fopen(jpeg, "w");
+
+            if (img == NULL)
+            {
+                printf("Could not create output file.\n");
+                free(buffer);
+                free(jpeg);
+                fclose(card);
+                return 1;
+            }
+            
             count++;
         }
-        
+
         if (img != NULL)
         {
             fwrite(buffer, sizeof(BYTE), BLOCK, img);
