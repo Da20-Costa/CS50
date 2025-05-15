@@ -20,17 +20,28 @@ int main(int argc, char *argv[])
     }
 
     BYTE *buffer = malloc(BLOCK * sizeof(BYTE));
-    char *image = malloc(8 * sizeof(char));
+    char *jpeg = malloc(8 * sizeof(char));
+    FILE *img = NULL;
+    int count = 0;
 
     while(fread(buffer, BYTE, BLOCK, card) == BLOCK)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
-            for(int i = 0; i < 50; i++)
-            {
-                sprintf(image, "%03i.jpg", i);
-            }
-            FILE *img = fopen(image, "w");
+            sprintf(jpeg, "%03i.jpg", count);
+            img = fopen(jpeg, "w");
+            count++;
+        }
+        if (img != NULL)
+        {
+            fwrite(buffer, BYTE, BLOCK, img);
         }
     }
+
+    free(buffer);
+    free(jpeg);
+    fclose(card);
+    fclose(img);
+
+    return 0;
 }
