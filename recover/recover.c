@@ -25,12 +25,12 @@ int main(int argc, char *argv[])
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
-            char *image = malloc(7 * sizeof(char));
+            char *image = malloc(8 * sizeof(char));
             for(int i = 0; i < 50; i++)
             {
                 sprintf(image, "%03i.jpg", i);
             }
-            
+            FILE *img = fopen(image, "w");
         }
     }
 }
