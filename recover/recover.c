@@ -20,12 +20,12 @@ int main(int argc, char *argv[])
     }
 
     BYTE *buffer = malloc(BLOCK * sizeof(BYTE));
+    char *image = malloc(8 * sizeof(char));
 
     while(fread(buffer, BYTE, BLOCK, card) == BLOCK)
     {
         if (buffer[0] == 0xff && buffer[1] == 0xd8 && buffer[2] == 0xff && (buffer[3] & 0xf0) == 0xe0)
         {
-            char *image = malloc(8 * sizeof(char));
             for(int i = 0; i < 50; i++)
             {
                 sprintf(image, "%03i.jpg", i);
