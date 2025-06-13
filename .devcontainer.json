@@ -133,7 +133,7 @@
         "html.suggest.html5": false,
         "java.configuration.runtimes": [
           {
-            "name": "JavaSE-23",
+            "name": "JavaSE-24",
             "path": "/opt/jdk",
             "default": true
           }
@@ -227,7 +227,7 @@
     8082,
     8787
   ],
-  "image": "ghcr.io/cs50/codespace:2c2204c435e1ccbcabd29addd2c12f0aedde224f",
+  "image": "ghcr.io/cs50/codespace:acff26ad21cf1868ca9ff8fb987bf4cef027400f",
   "mounts": [
     {
       "source": "/var/run/docker.sock",
