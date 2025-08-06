@@ -1,0 +1,2 @@
+. Based on the average of the values (energy, valence, danceability), I'd say it's pretty balanced, so I guess it'd tend to green, according to Spotify's parameters.
+. I guess it would be more precise if it were based not onthe musics, but on the genres listened by the user.
