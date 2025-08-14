@@ -44,3 +44,7 @@ a:hover {
     object-fit: cover;
     border: 5px solid white;
 }
+
+#soccer-description {
+    font-size: 20px;
+}
