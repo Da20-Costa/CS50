@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+        <script>
+            // Wait for the DOM to be loaded
+            document.addEventListener('DOMContentLoaded', function(){
+                // Script for the correct answer, it must turn green when clicked and change the feedback
+                let correct = document.querySelector('.correct');
+                correct.addEventListener('click', function(){
+                    correct.style.backgroundColor = '#00ff00';
+                    document.querySelector('#feedback1').innerHTML = 'Correct!';
+                });
+
+                // Script for the incorrect answer,it must turn red when clicked and change the feedback
+                let incorrects = document.querySelectorAll('.incorrect');
+                for (let wrong of incorrects){
+                    wrong.addEventListener('click', function(){
+                        wrong.style.backgroundColor = '#ff0000';
+                        document.querySelector('#feedback1').innerHTML = 'Incorrect';
+                    });
+                }
+
+
+                // Check free response answer
+                document.querySelector('#check').addEventListener('click', function(){
+                    let answer = 'brazil';
+                    let input = document.querySelector('input');
+                    if (input.value.toLowerCase() === answer){
+                        input.style.backgroundColor = '#00ff00';
+                        document.querySelector('#feedback2').innerHTML = 'Correct!';
+                    }
+                    else {
+                        input.style.backgroundColor = '#ff0000';
+                        document.querySelector('#feedback2').innerHTML = 'Incorrect';
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+
+                <!--Question-->
+                <h3>Who's the top goalscorer of the brazilian national team (considering only official matches)?</h3>
+
+                <!--Options-->
+                <button class="incorrect">Pele</button>
+                <button class="incorrect">Ronaldo Nazario</button>
+                <button class="incorrect">Ronaldinho</button>
+                <button class="correct">Neymar</button>
+                <button class="incorrect">Romario</button>
+
+                <p id="feedback1"></p>
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!--Question-->
+                <h3>Which country has won the most titles of the FIFA World Cup?</h3>
+                <!--Options-->
+                <input type="text">
+                <button id="check">Check answer</button>
+
+                <p id="feedback2"></p>
+
+            </div>
+        </div>
+    </body>
+</html>
