@@ -34,5 +34,6 @@ a:hover {
 }
 
 #image-me {
-    border: 5px solid black;
+    border: 5px solid grey;
+    border-radius: 20%;
 }
