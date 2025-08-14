@@ -1,0 +1,22 @@
+HTML Tags
+<nav>: Used to create a semantic navigation bar that is present on all four pages of the website.
+<a>: Used for all hyperlinks, both in the navigation bar and for the main call-to-action buttons on each page.
+<div>: Used as a general container for content, particularly for structuring the layout with Bootstrap's grid system (.row, .col).
+<header>: Used to contain the main heading (<h1>) of each page, providing a clear structural introduction.
+<h1>: Used for the main title of each page (e.g., "Welcome to my website!", "About Me").
+<main>: Used to wrap the primary, unique content of each page, separating it from the header and footer.
+<p>: Used for all paragraphs of text, from the introductory descriptions to the main content blocks.
+<img>: Used to display all images, such as the CS50 logo, my personal picture, and the soccer player photos.
+<footer>: Used at the bottom of every page to display the copyright information consistently.
+<button>: Used on the contact page to create an interactive element that the user can click.
+
+CSS Properties
+background-color: Used to set a light gray background for the entire body of the site.
+color: Used in multiple selectors to define the text color for titles, paragraphs, and links.
+font-size: Used to specify the size of the text in various elements, such as the footer, titles, and descriptions.
+border: Used to add a styled border around my personal picture and the soccer images.
+object-fit: Used on the soccer gallery images to ensure they all have the same height without distorting their aspect ratio.
+
+Bootstrap and JavaScript
+Bootstrap Usage: I used Bootstrap's responsive grid system (.row, .col) to structure the page layouts and its utility classes for styling buttons, images, and spacing.
+JavaScript Usage: I used JavaScript on the contact page to listen for a click event on a button, which then dynamically inserts a thank-you message into a paragraph on the page.
