@@ -20,6 +20,7 @@ a:hover {
     text-decoration:none;
 }
 
-#my-image {
-    text-align: right;
+#introduction {
+    color: #0056b3;
+    font-size: 20px;
 }
