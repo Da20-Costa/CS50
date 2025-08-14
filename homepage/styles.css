@@ -8,3 +8,14 @@ body {
     text-align: center;
     padding: 20px 0;
 }
+
+footer p{
+    font-size: 13px;
+    color: #6c757d;
+    text-align: center;
+}
+
+a:hover {
+    color: #007bff;
+    text-decoration:none;
+}
