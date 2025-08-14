@@ -19,3 +19,7 @@ a:hover {
     color: #007bff;
     text-decoration:none;
 }
+
+#my-image {
+    text-align: right;
+}
