@@ -127,7 +127,10 @@ def register():
             return apology("Password and confirmation don't match", 400)
 
         #search if the user already exists
-        usernames = db.execute("SELECT username FROM users")
+        rows = db.execute("SELECT username FROM users")
+
+        if len(rows) != 0:
+            return apology("Username already in use", 400)
 
     return render_template("register.html")
 
