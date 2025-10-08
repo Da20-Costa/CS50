@@ -42,6 +42,7 @@ def index():
 @login_required
 def buy():
     if request.method == "POST":
+        #Validate the inputs
         shares = request.form.get("shares")
         if not symbol:
             return apology("Missing symbol", 400)
@@ -50,13 +51,28 @@ def buy():
         if not shares.isdigit() or not int(shares) or shares <= 0:
             return apology("Shares must be a positive number", 400)
 
+        #look up for the value
         quote = lookup(request.form.get("symbol").upper())
         if quote is None:
             return apology("Symbol not found", 400)
 
+        #obtaining the values of the quotes
         price = quote["price"]
         total_cost = int(shares) * price
-        cash = db.execute("SELECT cash FROM users WHERE id=?", session["user_id"])
+
+        #Obtaining how much cash te does the user have
+        cash = db.execute("SELECT cash FROM users WHERE id=?", session["user_id"])[0]["cash"]
+
+        #checkin if the money suffices
+        if cash < total_cost:
+            return apology("Not enough cash", 400)
+
+        #update the user's amount of money
+        db.execute("UPDATE users SET cash = cash - ? WHERE id =?", total_cost, session["user_id"])
+
+        #update history
+        
+
 
 @app.route("/history")
 @login_required
