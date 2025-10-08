@@ -44,6 +44,7 @@ def buy():
     if request.method == "POST":
         #Validate the inputs
         shares = request.form.get("shares")
+        symbol = request.form.get("symbol").upper()
         if not symbol:
             return apology("Missing symbol", 400)
         if not shares:
@@ -52,7 +53,7 @@ def buy():
             return apology("Shares must be a positive number", 400)
 
         #look up for the value
-        quote = lookup(request.form.get("symbol").upper())
+        quote = lookup(symbol)
         if quote is None:
             return apology("Symbol not found", 400)
 
@@ -71,7 +72,7 @@ def buy():
         db.execute("UPDATE users SET cash = cash - ? WHERE id =?", total_cost, session["user_id"])
 
         #update history
-        
+        db.execute("INSERT INTO history (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)", session["user_id"], symbol, shares, total_cost)
 
 
 @app.route("/history")
