@@ -24,6 +24,7 @@
                 <td>{{ transaction.symbol }}</td>
                 <td>{{ transaction.shares }}</td>
                 <td>{{ (transaction.price) | usd }}</td>
+                <td>{{ (transaction.price * transaction.shares) | usd}}</td>
                 <td>{{ transaction.timestamp }}</td>
             </tr>
             {% endfor %}
