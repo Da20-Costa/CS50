@@ -8,11 +8,7 @@
     <h1>Buy</h1>
     <form action="/buy" method="POST">
         <input type="text" name="symbol" autofocus placeholder="Symbol">
-        <br/>
-        <button type="submit">Quote</button>
+        <input type="text" name="shares" placeholder="Shares">
+        <button type="submit">Buy/button>
     </form>
-    {% if quote %}
-        <h3>{{ quote.name quote.symbol }}</h3>
-        <p>Price: {{ quote.price|usd }}</p>
-    {% endif %}
 {% endblock %}
