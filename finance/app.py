@@ -35,7 +35,7 @@ def after_request(response):
 @login_required
 def index():
     """Show portfolio of stocks"""
-    
+
 
 
 @app.route("/buy", methods=["GET", "POST"])
@@ -194,4 +194,4 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    return apology("TODO")
+    
