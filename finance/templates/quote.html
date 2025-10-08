@@ -5,5 +5,9 @@
 {% endblock %}
 
 {% block main %}
-    
+    <h2>Search a stock quote</h2>
+    <form action="/quote" method="POST">
+        <input type="text" name="symbol" autofocus placeholder="Symbol">
+        <button type="submit">Quote</button>
+    </form>
 {% endblock %}
