@@ -42,11 +42,21 @@ def index():
 @login_required
 def buy():
     if request.method == "POST":
-        symbol = request.form.get("symbol").upper()
         shares = request.form.get("shares")
         if not symbol:
             return apology("Missing symbol", 400)
-        if not shares or not
+        if not shares:
+            return apology("Missing shares", 400)
+        if not shares.isdigit() or not int(shares) or shares <= 0:
+            return apology("Shares must be a positive number", 400)
+
+        quote = lookup(request.form.get("symbol").upper())
+        if quote is None:
+            return apology("Symbol not found", 400)
+
+        price = quote["price"]
+        total_cost = int(shares) * price
+        cash = db.execute("SELECT cash FROM users WHERE id=?", session["user_id"])
 
 @app.route("/history")
 @login_required
