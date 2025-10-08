@@ -132,6 +132,9 @@ def register():
         if len(rows) != 0:
             return apology("Username already in use", 400)
 
+        #Register the user
+        db.execute("INSERT INTO user (username, hash) VALUES (?, ?)", request.form.get("username"), generate_password_hash(request.form.get("password")))
+
     return render_template("register.html")
 
 
