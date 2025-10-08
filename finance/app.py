@@ -126,6 +126,9 @@ def register():
         if request.form.get("password") != request.form.get("confirmation"):
             return apology("Password and confirmation don't match", 400)
 
+        #search if the user already exists
+        usernames = db.execute("")
+
     return render_template("register.html")
 
 
