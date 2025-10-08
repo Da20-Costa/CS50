@@ -74,7 +74,11 @@ def buy():
         #update history
         db.execute("INSERT INTO history (user_id, symbol, shares, price) VALUES (?, ?, ?, ?)", session["user_id"], symbol, shares, price)
 
-        f
+        flash(f"Bought {shares} shares of {symbol} costing {usd(total_cost)}!")
+        return redirect("/")
+
+    else:
+        return render_template("buy.html")
 
 
 @app.route("/history")
