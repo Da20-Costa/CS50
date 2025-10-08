@@ -116,6 +116,7 @@ def register():
     session.clear()
 
     if request.method == "POST":
+        #validation of the credentials
         if not request.form.get("username"):
             return apology("Missing username", 400)
         if not request.form.get("password"):
