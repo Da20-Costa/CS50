@@ -42,8 +42,11 @@ def index():
 @login_required
 def buy():
     if request.method == "POST":
-        sym
-
+        symbol = request.form.get("symbol").upper()
+        shares = request.form.get("shares")
+        if not symbol:
+            return apology("Missing symbol", 400)
+        if not shares or not
 
 @app.route("/history")
 @login_required
