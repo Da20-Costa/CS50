@@ -142,6 +142,7 @@ def logout():
 @login_required
 def quote():
     """Get stock quote."""
+    #Get the quote with lookup
     if request.method == "POST":
         quote = lookup(request.form.get("symbol"))
         if not quote:
@@ -194,4 +195,5 @@ def register():
 @login_required
 def sell():
     """Sell shares of stock"""
-    
+    #get user's purchased stocks
+    stocks = db.execute("SELECT symbol,")
