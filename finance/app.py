@@ -122,7 +122,9 @@ def register():
         if not request.form.get("password"):
             return apology("Missing password", 400)
         if not request.form.get("confirmation"):
-            return apology("Missing confirmationof password", 400)
+            return apology("Missing confirmation of password", 400)
+        if request.form.get("password") != request.form.get("confirmation"):
+            return apology("Password and confirmation don't match", 400)
 
     return render_template("register.html")
 
