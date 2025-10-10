@@ -226,4 +226,12 @@ def categories():
     """Show and manage user's new categories"""
 
     if request.method == "POST":
-        
+
+        # Get user's new category
+        new_category = request.form.get("category_name")
+
+        if not new_category:
+            return apology("Missing category name", 400)
+
+        # Verify if category already exists
+        existing = db.execute("SELECT * FROM categories")
