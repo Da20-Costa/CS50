@@ -234,4 +234,9 @@ def categories():
             return apology("Missing category name", 400)
 
         # Verify if category already exists
-        existing = db.execute("SELECT * FROM categories")
+        existing = db.execute("SELECT * FROM categories WHERE user_id=? AND name=?", session["user_id"], new_category)
+        if existing:
+            return apology("Category already exists", 400)
+
+        # Insert the new category
+        db.execute("INSERT INTO categories (user_id, name) VALUES ())
