@@ -208,3 +208,13 @@ def add():
     else:
         return render_template("add.html", transactions=transactions, categories=categories)
 
+
+@app.route("/history")
+@login_required
+def history():
+    """Show history of transactions"""
+    # get the transactions table to be shown
+    transactions = db.execute(
+        "SELECT * FROM transactions WHERE user_id=? ORDER BY timestamp DESC", session["user_id"])
+
+    return render_template("history.html", transactions=transactions)
