@@ -218,3 +218,12 @@ def history():
         "SELECT * FROM transactions WHERE user_id=? ORDER BY timestamp DESC", session["user_id"])
 
     return render_template("history.html", transactions=transactions)
+
+
+@app.route("/categories", methods=["GET", "POST"])
+@login_required
+def categories():
+    """Show and manage user's new categories"""
+
+    if request.method == "POST":
+        
