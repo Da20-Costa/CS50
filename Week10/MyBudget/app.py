@@ -252,4 +252,7 @@ def categories():
 
 @app.route("/delete_category", methods = ["POST"])
 @login_required
+def delete_category():
+    """Delete a user's custom category"""
 
+    category_id = request.form.get("category_id")
