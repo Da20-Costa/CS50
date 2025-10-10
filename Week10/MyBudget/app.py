@@ -256,3 +256,9 @@ def delete_category():
     """Delete a user's custom category"""
 
     category_id = request.form.get("category_id")
+
+    if category_id:
+        db.execute("DELETE FROM categories WHERE id=? AND user_id=?", category_id, session["user_id"])
+        flash("Category deleted!")
+
+    return redirect("/categories")
