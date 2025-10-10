@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Dashboard
+{% endblock %}
+
+{% block main %}
+    <h1>Dashboard</h1>
+    <h2>Hello, {{ username }}</h2>
+    <p class="lead">Here is your financial summary for this month.</p>
+
+    <hr>
+
+    <div class="row mb-4">
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Monthly Income</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ total_income | brl }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Total Expenses</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ total_expense | brl }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-white {% if balance >= 0 %}bg-primary{% else %}bg-warning{% endif %} mb-3">
+                <div class="card-header">Current Balance</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ balance | brl }}</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d=grid gap-2 col-6 mx-auto mb-5">
+        <a href="/add" class="btn btn-dark btn-lg">Add New Transaction</a>
+    </div>
+
+    <h4 class="text-start">Recent Transactions</h4>
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th class="text-start">Date</th>
+                <th class="text-start">Description</th>
+                <th class="text-start">Category</th>
+                <th class="text-end">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recent_transaction in recent_transactions %}
+            <tr>
+                <td class="text-start">{{ recent_transaction.timestamp | dateformat}}</td>
+                <td class="text-start">{{ recent_transaction.description }}</td>
+                <td class="text-start">{{ recent_transaction.category }}</td>
+                <td class="text-end {% if recent_transaction.type == 'Income' %}text-success{% else %}text-danger{% endif%}">
+                    {{ recent_transaction.amount | brl }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

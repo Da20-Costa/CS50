@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add Transaction
+{% endblock %}
+
+{% block main %}
+    <h1>Add a Transaction</h1>
+    <form action="/add" method="POST">
+        <div class="mb-3">
+            <input class="form-control" type="number" name="amount" autofocus placeholder="Amount" step="0.01" min="0.01">
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" name="type">
+                <option disabled selected value="">Select Transaction Type</option>
+                {% for transaction in transactions %}
+                <option value={{ transaction }}>{{ transaction }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <select class="form-select" name="category">
+                <option disabled selected value="">Select Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input class="form-control" type="text" name="description" placeholder="Description (Optional)">
+        </div>
+
+        <button class="btn btn-primary" type="submit">Add</button>
+    </form>
+
+{% endblock %}
