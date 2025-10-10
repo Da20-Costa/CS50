@@ -239,4 +239,12 @@ def categories():
             return apology("Category already exists", 400)
 
         # Insert the new category
-        db.execute("INSERT INTO categories (user_id, name) VALUES ())
+        db.execute("INSERT INTO categories (user_id, name) VALUES (?, ?)", session["user_id"], new_category)
+
+        flash("Category added!")
+        return redirect("/categories")
+
+    else:
+        # Get default and user's categories
+        user_categories = db.execute("SELECT * FROM categories WHERE user_id IS NULL OR user_id=?", session["user_id"])
+        return render_template("categories.html", categories=user_categories)

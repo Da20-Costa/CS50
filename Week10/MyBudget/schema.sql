@@ -25,3 +25,6 @@ CREATE TABLE categories (
     FOREIGN KEY(user_id) REFERENCES users(id),
     UNIQUE(user_id, name)
 );
+
+-- Insert default categories
+INSERT INTO categories (name) VALUES ()
