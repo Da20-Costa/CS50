@@ -55,7 +55,7 @@
         <tbody>
             {% for recent_transaction in recent_transactions %}
             <tr>
-                <td class="text-start">{{ recent_transaction.timestamp | dateformat}}</td>
+                <td class="text-start">{{ recent_transaction.timestamp | dateformat }}</td>
                 <td class="text-start">{{ recent_transaction.description }}</td>
                 <td class="text-start">{{ recent_transaction.category }}</td>
                 <td class="text-end {% if recent_transaction.type == 'Income' %}text-success{% else %}text-danger{% endif%}">
