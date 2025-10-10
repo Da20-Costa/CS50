@@ -20,12 +20,11 @@
         <tbody>
             {% for transaction in transactions %}
             <tr>
-                <td>{{ transaction.type }}</td>
-                <td>{{ transaction.symbol }}</td>
-                <td>{{ transaction.shares | abs}}</td>
-                <td>{{ (transaction.price) | usd }}</td>
-                <td>{{ (transaction.price * (transaction.shares | abs)) | usd }}</td>
-                <td>{{ transaction.timestamp }}</td>
+                <td class="text-start">{{ transaction.type }}</td>
+                <td class="text-start">{{ transaction.amount | brl }}</td>
+                <td class="text-start">{{ transaction.category }}</td>
+                <td class="text-start">{{ transaction.description }}</td>
+                <td class="text-end {% if recent_transaction.type == 'Income' %}text-success{% else %}text-danger{% endif%}">{{ transaction.timestamp | date_format }}</td>
             </tr>
             {% endfor %}
         </tbody>
