@@ -1,3 +1,8 @@
+-- Delete existing tables
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS transactions;
+DROP TABLE IF EXISTS users;
+
 -- Table to store the app users
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,4 +32,9 @@ CREATE TABLE categories (
 );
 
 -- Insert default categories
-INSERT INTO categories (name) VALUES ()
+INSERT INTO categories (name) VALUES
+    ('Food'),
+    ('Housing'),
+    ('Leisure'),
+    ('Salary'),
+    ('Transportation');

@@ -248,3 +248,8 @@ def categories():
         # Get default and user's categories
         user_categories = db.execute("SELECT * FROM categories WHERE user_id IS NULL OR user_id=?", session["user_id"])
         return render_template("categories.html", categories=user_categories)
+
+
+@app.route("/delete_category", methods = ["POST"])
+@login_required
+
