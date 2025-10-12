@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Recurring
+{% endblock %}
+
+{% block main %}
+    <h2 class="mb-4">Add Recurring Transactions</h2>
+    <form action="/budget" method="POST" class="mb-5">
+        <div class="row g-2">
+            <div class="col-md">
+                <select name="category" class="form-select">
+                    <option disabled selected>Select Category</option>
+                    {% for category in categories %}
+                    <option value="{{ category.name }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-md">
+                <input type="number" name="amount" class="form-control" placeholder="Budget Amount" step="0.01">
+            </div>
+            <div class="col-md-auto">
+                <button type="submit" class="btn btn-success">Save Budget</button>
+            </div>
+        </div>
+    </form>
+
+    <h3 class="mb-4">Current Month's budgets</h3>
+    <ul class="list-group">
+        {% for budget in budgets %}
+        <li class="list-group-item d-flex align-items-center">
+            <span class="me-auto">{{ budget.category_name }}</span>
+            <span class="badge bg-primary rounded-pill me-3">{{ budget.amount | brl }}</span>
+            <form action="/delete_budget" method="POST" style="display:inline;">
+                <input type="hidden" name="budget_id" value="{{ budget.id }}">
+                <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+            </form>
+        </li>
+        {% else %}
+        <li class="list-group-item">No budgets set for this month yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
