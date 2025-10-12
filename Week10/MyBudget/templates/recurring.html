@@ -35,16 +35,18 @@
     <h3 class="mb-4">Your Recurring Transactions/h3>
     <ul class="list-group">
         {% for trans in recurring_trans %}
-        <li class="list-group-item d-flex align-items-center">
-            <span class="me-auto">{{ budget.category_name }}</span>
-            <span class="badge bg-primary rounded-pill me-3">{{ budget.amount | brl }}</span>
-            <form action="/delete_budget" method="POST" style="display:inline;">
-                <input type="hidden" name="budget_id" value="{{ budget.id }}">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <strong>{{ trans.description }}</strong> ({{ trans.amount | brl}} - Day {{ trans.day_of_month }})
+                <small class="d-block text-muted">{{ trans.type }} / {{trans.category}}</small>
+            </span>
+            <form action="/delete_recurring" method="POST">
+                <input type="hidden" name="recurring_id" value="{{ trans.id }}">
                 <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
             </form>
         </li>
         {% else %}
-        <li class="list-group-item">No budgets set for this month yet.</li>
+        <li class="list-group-item">No recurring transaction set yet.</li>
         {% endfor %}
     </ul>
 {% endblock %}
