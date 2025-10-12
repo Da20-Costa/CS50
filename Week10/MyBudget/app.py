@@ -429,6 +429,7 @@ def recurring():
     """Manage recurring transactions"""
 
     user_id = session["user_id"]
+    transactions = ["Income", "Expense"]
 
     if request.method == "POST":
         amount = request.form.get("amount")
@@ -464,7 +465,7 @@ def recurring():
             "SELECT name FROM categories WHERE user_id IS NULL OR user_id = ?", user_id
         )
 
-        return render_template("recurring.html", transactions=recurring_trans, categories=categories)
+        return render_template("recurring.html", recurring_trans=recurring_trans, categories=categories, transactions=transactions)
 
 
 @app.route("/delete_recurring", methods=["POST"])
