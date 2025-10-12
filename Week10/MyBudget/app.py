@@ -426,3 +426,9 @@ def delete_budget():
 @app.route("/recurring", methods=["GET", "POST"])
 @login_required
 def recurring():
+    """Manage recurring transactions"""
+
+    user_id = session["user_id"]
+
+    if request.method == "POST":
+        
