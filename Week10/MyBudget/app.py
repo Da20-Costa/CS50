@@ -31,7 +31,7 @@ Session(app)
 db = SQL("sqlite:///budget.db")
 
 # Auxiliar Function
-def process_recurring_transaction(user_id):
+def process_recurring_transactions(user_id):
     """Checks and adds recurring transactions for the current month if not already added."""
 
     current_month = datetime.now().strftime('%Y-%m') # '2025-10'
@@ -53,6 +53,11 @@ def process_recurring_transaction(user_id):
             )
 
             # Update that the rule was already processed this month
+            db.execute (
+                "UPDATE recurring_transactions SET last_added = ? WHERE id = ?", current_month, rule["id"]
+            )
+    return
+
 
 @app.after_request
 def after_request(response):
@@ -70,6 +75,8 @@ def index():
 
     # Get user's id from the session
     user_id = session["user_id"]
+
+    process_recurring_transactions(user_id)
 
     # Current year and month
     current_year = datetime.now().year
