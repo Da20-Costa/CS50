@@ -44,6 +44,15 @@ def process_recurring_transaction(user_id):
     for rule in recurring_rules:
         # if the transaction wasn't adde yet this month
         if rule["last_added"] != current_month:
+            day = min(rule["day_of_month"], 28)
+            transaction_date = f"{current_month}-{str(day).zfill(2)} 00:00:00"
+
+            # Insert the transaction in the transactions table
+            db.execute(
+                "INSERT INTO transactions (user_id, description, amount, type, category, timestamp) VALUES (?, ?, ?, ?, ?, ?)", user_id, rule["description"], rule["amount"], rule["type"], rule["category"], transaction_date
+            )
+
+            # Update that the rule was already processed this month
 
 @app.after_request
 def after_request(response):
