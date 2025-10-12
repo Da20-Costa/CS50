@@ -14,3 +14,19 @@ nav .navbar-brand
 .list-group-item:nth-child(odd) {
   background-color: #f8f9fa;
 }
+
+#nav-menu {
+  background-color: #74FF73 !important;
+}
+
+#nav-menu .nav-link:hover {
+  color: white;
+}
+
+body {
+  background-color: #FDFCE8;
+}
+
+main {
+  background-color: #FDFC00;
+}
