@@ -440,3 +440,10 @@ def recurring():
         # Validation
         if not all([amount, transaction_type, description, category, day]):
             return apology("All field are required", 400)
+        try:
+            amount = float(amount)
+            day = int(day)
+            if amount <= 0 or not (1 <= day <= 31):
+                raise ValueError
+        except ValueError:
+            return apology("Invalid amount or day of month", 400)
