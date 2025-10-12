@@ -12,7 +12,18 @@
         </div>
         <div class="mb-3">
             <select class="form-select" name="type">
-                
+                <option disabled selected value="">Select Transaction Type</option>
+                {% for transaction in transactions %}
+                <option value="{{ transaction }}">{{ transaction }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <select class="form-select" name="category">
+                <option disabled selected value="">Select Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
             </select>
         </div>
     </form>
