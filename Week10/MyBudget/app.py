@@ -447,3 +447,37 @@ def recurring():
                 raise ValueError
         except ValueError:
             return apology("Invalid amount or day of month", 400)
+
+        # Insert the new rule in db
+        db.execute(
+            "INSERT INTO recurring_transactions (user_id, description, amount, type, category, day_of_month) VALUES (?, ?, ?, ?, ?, ?)", user_id, description, amount, transaction_type, category, day
+        )
+
+        flash("Recurring transaction saved!")
+        return redirect("/recurring")
+
+    else:
+        recurring_trans = db.execute(
+            "SELECT * FROM recurring_transactions WHERE user_id = ?", user_id
+        )
+        categories = db.execute (
+            "SELECT name FROM categories WHERE user_id IS NULL OR user_id = ?", user_id
+        )
+
+        return render_template("recurring.html", transactions=recurring_trans, categories=categories)
+
+
+@app.route("/delete_recurring", methods=["POST"])
+@login_required
+def delete_recurring():
+    """Delete a user's recurring transaction rule"""
+
+    recurring_id = request.form.get("recurring_id")
+
+    if recurring_id:
+        db.execute(
+            "DELETE FROM recurring_transactions WHERE id = ? AND user_id = ?", recurring_id, session["user_id"]
+        )
+        flash("Recurring transaction rule deleted!")
+
+    return redirect("/recurring")
