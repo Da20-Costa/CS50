@@ -30,6 +30,20 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///budget.db")
 
+# Auxiliar Function
+def process_recurring_transaction(user_id):
+    """Checks and adds recurring transactions for the current month if not already added."""
+
+    current_month = datetime.now().strftime('%Y-%m') # '2025-10'
+
+    # Get all user's recurring transaction rules
+    recurring_rules = db.execute(
+        "SELECT * FROM recurring_transactions WHERE user_id = ?", user_id
+    )
+
+    for rule in recurring_rules:
+        # if the transaction wasn't adde yet this month
+        if rule["last_added"] != current_month:
 
 @app.after_request
 def after_request(response):
