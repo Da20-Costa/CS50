@@ -431,4 +431,12 @@ def recurring():
     user_id = session["user_id"]
 
     if request.method == "POST":
-        
+        amount = request.form.get("amount")
+        transaction_type = request.form.get("type")
+        description = request.form.get("description")
+        category = request.form.get("category")
+        day = request.form.get("day_of_month")
+
+        # Validation
+        if not all([amount, transaction_type, description, category, day]):
+            return apology("All field are required", 400)

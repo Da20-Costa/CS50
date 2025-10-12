@@ -55,7 +55,7 @@ CREATE TABLE budgets (
 CREATE TABLE recurring_transactions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    description TEXT,
+    description TEXT NOT NULL,
     amount NUMERIC NOT NULL,
     type TEXT NOT NULL,
     category TEXT NOT NULL,
