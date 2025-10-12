@@ -8,7 +8,7 @@
     <h2 class="mb-4">Add Recurring Transactions</h2>
     <form action="/recurring" method="POST" class="mb-5">
         <div class="mb-3">
-            <input class="form-control" name="amount" placeholder="Amount" type="number" step="0.01">
+            <input autofocus class="form-control" name="amount" placeholder="Amount" type="number" step="0.01">
         </div>
         <div class="mb-3">
             <select class="form-select" name="type">
@@ -26,11 +26,15 @@
                 {% endfor %}
             </select>
         </div>
+        <div class="mb-3">
+            <input class="form-control" type="text" name="description" placeholder="Description (e.g., Salary, Netflix)">
+        </div>
+        <button class="btn btn-primary" type="submit">Save Recurring Rule</button>
     </form>
 
-    <h3 class="mb-4">Current Month's budgets</h3>
+    <h3 class="mb-4">Your Recurring Transactions/h3>
     <ul class="list-group">
-        {% for budget in budgets %}
+        {% for trans in recurring_trans %}
         <li class="list-group-item d-flex align-items-center">
             <span class="me-auto">{{ budget.category_name }}</span>
             <span class="badge bg-primary rounded-pill me-3">{{ budget.amount | brl }}</span>
