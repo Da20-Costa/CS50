@@ -1,0 +1,16 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+#chart-format {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    margin: auto;
+}
+
+.list-group-item:nth-child(odd) {
+  background-color: #f8f9fa;
+}

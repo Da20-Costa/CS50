@@ -75,7 +75,32 @@ def index():
         "SELECT * FROM transactions WHERE user_id = ? ORDER BY timestamp DESC LIMIT 5", user_id
     )
 
-    return render_template("index.html", username=username, total_income=total_income, total_expense=total_expense, balance=balance, recent_transactions=recent_transactions)
+    # Budget's progress
+    budget_progress = []
+    budgets = db.execute(
+        "SELECT category_name, amount FROM budgets WHERE user_id = ? AND month = ?", user_id, f"{current_year}-{str(current_month).zfill(2)}"
+    )
+
+    # Get total expense by category
+    expenses_by_category = db.execute(
+        "SELECT category, SUM(amount) as total FROM transactions WHERE user_id = ? AND type = 'Expense' AND strftime('%Y-%m', timestamp) = ? GROUP BY category", user_id, f"{current_year}-{str(current_month).zfill(2)}"
+    )
+
+    # Transform the expenses list into a dictionary for easy search
+    spent_map = {item['category']: item['total'] for item in expenses_by_category}
+
+    for budget in budgets:
+        category = budget["category_name"]
+        spent= spent_map.get(category, 0) # Get the expense or 0, if it doesn't exist
+        percentage = (spent / budget["amount"]) * 100 if budget["amount"] > 0 else 0
+        budget_progress.append({
+            "category": category,
+            "budgeted": budget["amount"],
+            "spent": spent,
+            "percentage": min(100, percentage) # Limits to 100%
+        })
+
+    return render_template("index.html", username=username, total_income=total_income, total_expense=total_expense, balance=balance, recent_transactions=recent_transactions, budget_progress=budget_progress)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -209,15 +234,58 @@ def add():
         return render_template("add.html", transactions=transactions, categories=categories)
 
 
+@app.route("/delete_transaction", methods=["POST"])
+@login_required
+def delete_transaction():
+    """Delete a user's transactions"""
+
+    transaction_id = request.form.get("transaction_id")
+
+    # Delete specific user's transaction
+    if transaction_id:
+        db.execute(
+            "DELETE FROM transactions WHERE id = ? AND user_id = ?", transaction_id, session["user_id"]
+        )
+        flash("Transaction deleted!")
+
+    return redirect(request.referrer or "/")
+
 @app.route("/history")
 @login_required
 def history():
-    """Show history of transactions"""
-    # get the transactions table to be shown
-    transactions = db.execute(
-        "SELECT * FROM transactions WHERE user_id=? ORDER BY timestamp DESC", session["user_id"])
+    """Show history of transactions with filters"""
 
-    return render_template("history.html", transactions=transactions)
+    user_id = session["user_id"]
+
+    # Get form's filters (If they exist)
+    month_filter = request.args.get("month") #YYYY-MM Format
+    category_filter = request.args.get("category")
+
+    # Make the query's beginning
+    query = "SELECT * FROM transactions WHERE user_id = ?"
+
+    # Define the values that will take places of the ?
+    params = [user_id]
+
+    # Complemente the query based on the filter
+    if month_filter:
+        query += " AND strftime('%Y-%m', timestamp) = ?"
+        params.append(month_filter)
+
+    if category_filter:
+        query += " AND category = ?"
+        params.append(category_filter)
+
+    # It all is ordered based on the most recents
+    query += " ORDER BY timestamp DESC"
+
+    # Execute the final query
+    transactions = db.execute(query, *params) # The * is a splat operator
+
+    # Get all the categories for the dropdown list
+    categories = db.execute("SELECT name FROM categories WHERE user_id IS NULL OR user_id = ?", user_id)
+
+    return render_template("history.html", transactions=transactions, categories=categories)
 
 
 @app.route("/categories", methods=["GET", "POST"])
@@ -262,3 +330,99 @@ def delete_category():
         flash("Category deleted!")
 
     return redirect("/categories")
+
+
+@app.route("/reports")
+@login_required
+def reports():
+    """Show charts of expenses"""
+
+    # Get total of expenses per category on the actual month
+    current_month = datetime.now().strftime('%Y-%m') #"2025-10"
+    expenses_by_category = db.execute(
+        "SELECT category, SUM(amount) as total FROM transactions WHERE user_id = ? AND type = 'Expense' AND strftime('%Y-%m', timestamp) = ? GROUP BY category ORDER BY total DESC", session["user_id"], current_month
+    )
+
+    # Prepare data for Chart.js
+    labels = []
+    data = []
+    for row in expenses_by_category:
+        labels.append(row["category"])
+        data.append(row["total"])
+
+    return render_template("reports.html", labels=labels, data=data)
+
+
+@app.route("/budget", methods=["GET", "POST"])
+@login_required
+def budget():
+    """Allow user to set monthly budgets for categories"""
+
+    if request.method == "POST":
+        category = request.form.get("category")
+        amount = request.form.get("amount")
+        current_month = datetime.now().strftime('%Y-%m')
+
+        # Validation
+        if not category or not amount:
+            return apology("Must provide category and amount", 400)
+        try:
+            amount = float(amount)
+            if amount < 0: raise ValueError
+        except ValueError:
+            return apology("Amount must be a positive number", 400)
+
+        # Verify if there already is a budget for this category/month
+        existing_budget = db.execute(
+            "SELECT id FROM budgets WHERE user_id = ? AND category_name = ? AND month = ?", session["user_id"], category, current_month
+        )
+
+        if existing_budget:
+            # Update
+            db.execute(
+                "UPDATE budgets SET amount = ? WHERE id = ?", amount, existing_budget
+            )
+        else:
+            # Insert
+            db.execute(
+                "INSERT INTO budgets (user_id, category_name, amount, month) VALUES (?, ?, ?, ?)", session["user_id"], category, amount, current_month
+            )
+
+        flash("Budget Saved!")
+        return redirect("/budget")
+
+    else:
+        current_month = datetime.now().strftime('%Y-%m')
+
+        # Get monthly budgets
+        budgets = db.execute(
+            "SELECT id, category_name, amount FROM budgets WHERE user_id = ? AND month = ?", session["user_id"], current_month
+        )
+        # Get user's expense categories to the dropdown list
+        expense_categories = db.execute(
+            "SELECT name FROM categories WHERE (user_id IS NULL OR user_id = ?) AND name != 'Salary'", session["user_id"]
+        )
+
+        return render_template("budget.html", budgets=budgets, categories=expense_categories)
+
+
+@app.route("/delete_budget", methods=["POST"])
+@login_required
+def delete_budget():
+    """Delete a user's budget"""
+
+    budget_id = request.form.get("budget_id")
+
+    # Delete in the database
+    if budget_id:
+        db.execute(
+            "DELETE FROM budgets WHERE id = ? AND user_id = ?", budget_id, session["user_id"]
+        )
+        flash("Budget deleted!")
+
+    return redirect("/budget")
+
+
+@app.route("/recurring", methods=["GET", "POST"])
+@login_required
+def recurring():

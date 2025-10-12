@@ -6,6 +6,26 @@
 
 {% block main %}
     <h1 class="mb-4">History</h1>
+
+    <form action="/history" method="GET" class="row g-3 mb-4 align-items-center justify-content-end">
+        <div class="col-auto">
+            <label for="month" class="form-label">Month</label>
+            <input type="month" id="month" name="month" class="form-control">
+        </div>
+        <div class="col-auto">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" name="category" class="form-select">
+                <option value="" selected>All</option>
+                {% for category in categories %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-auto mt-auto">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </div>
+    </form>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -14,6 +34,7 @@
                 <th class="text-start">Amount</th>
                 <th class="text-start">Category</th>
                 <th class="text-start">Description</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -26,6 +47,12 @@
                 </td>
                 <td class="text-start">{{ transaction.category }}</td>
                 <td class="text-start">{{ transaction.description }}</td>
+                <td>
+                    <form action="/delete_transaction" method="POST" style="display:inline;">
+                        <input type="hidden" name="transaction_id" value="{{ transaction.id }}">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
             </tr>
             {% else %}
             <tr>
