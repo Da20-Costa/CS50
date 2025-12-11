@@ -1,6 +1,7 @@
 # My Budget
-#### Video Demo:  <URL HERE>
 #### Description:
+
+Project's Official Repo: https://github.com/Da20-Costa/MyBudget
 
 My Budget is a comprehensive web application designed to empower users to take control of their personal finances. Built with Python, Flask, and SQL, this tool moves beyond simple expense tracking to provide a full suite of features for budgeting, financial planning, and data visualization. In a world where financial literacy is paramount, My Budget offers a simple yet powerful platform for users to understand their spending habits, plan for the future, and achieve their financial goals.
 
